@@ -33,10 +33,13 @@ namespace BookStore.DL.Repositories
             var existingBook = StaticData.Books.FirstOrDefault(b => b.Id == book.Id);
             if (existingBook == null) return;
 
-            existingBook = new Book()
+            StaticData.Books.Remove(existingBook);
+
+            StaticData.Books.Add( new Book()
             {
+                Id = existingBook.Id,
                 Title = book.Title,
-            };
+            });
         }
     }
 }
