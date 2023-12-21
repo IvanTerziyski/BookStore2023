@@ -6,7 +6,6 @@ namespace BookStore.BL.Interfaces
     {
         public void AddBook(Book book);
 
-
         public void DeleteBook(int id);
 
         public void UpdateBook(Book book);
