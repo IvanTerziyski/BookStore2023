@@ -22,6 +22,7 @@ namespace BookStore.DL.InMemoryDb
                 Title = "Book 3"
             },
         };
+
         public static List<Author> Authors = new List<Author>()
         {
             new Author()
@@ -43,6 +44,5 @@ namespace BookStore.DL.InMemoryDb
                 Bio = "An Italian immigrant, moving to America, he was mesmorised by their culture, which led to his award-winning autobiography - A boot in American soil"
             },
         };
-
     }
 }
