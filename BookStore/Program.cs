@@ -1,5 +1,9 @@
 using BookStore.DL.Interfaces;
 using BookStore.DL.Repositories;
+using BookStore.BL.Interfaces;
+using BookStore.BL.Services;
+
+
 
 namespace BookStore
 {
@@ -10,12 +14,13 @@ namespace BookStore
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddSingleton<IBookRepository, BookRepository>();
+            builder.Services.AddSingleton<IBookService, BookService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddSingleton<IBookRepository, BookRepository>();
 
             var app = builder.Build();
 
