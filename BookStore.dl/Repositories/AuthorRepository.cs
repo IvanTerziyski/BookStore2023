@@ -13,7 +13,7 @@ namespace BookStore.DL.Repositories
 
         public void DeleteAuthor(int id)
         {
-            var author = StaticData.Authors.FirstOrDefault(b => b.Id == id);
+            var author = StaticData.Authors.FirstOrDefault(a => a.Id == id);
             if (author == null) return;
             StaticData.Authors.Remove(author);
         }
@@ -25,12 +25,12 @@ namespace BookStore.DL.Repositories
 
         public Author? GetAuthor(int id)
         {
-            return StaticData.Authors.FirstOrDefault(b => b.Id == id);
+            return StaticData.Authors.FirstOrDefault(a => a.Id == id);
         }
 
         public void UpdateAuthor(Author author)
         {
-            var existingAuthor = StaticData.Authors.FirstOrDefault(b => b.Id == author.Id);
+            var existingAuthor = StaticData.Authors.FirstOrDefault(a => a.Id == author.Id);
             if (existingAuthor == null) return;
 
             StaticData.Authors.Remove(existingAuthor);
