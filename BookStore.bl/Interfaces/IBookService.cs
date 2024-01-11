@@ -13,7 +13,7 @@ namespace BookStore.BL.Interfaces
 
         public Book? GetBook(int id);
 
-
+        public List<Book> GetAllBooksByAuthorAfterReleaseDate(int AuthorId, DateTime DateAfter);
         public List<Book> GetAllBooks();
     }
 }

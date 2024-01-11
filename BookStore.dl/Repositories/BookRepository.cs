@@ -23,6 +23,13 @@ namespace BookStore.DL.Repositories
             return StaticData.Books;
         }
 
+        public List<Book> GetAllBooksByAuthor(int authorId)
+        {
+            return InMemoryDb.StaticData.Books
+                    .Where(b => b.AuthorId == authorId)
+                    .ToList();
+        }
+
         public Book? GetBook(int id)
         {
             return StaticData.Books.FirstOrDefault(b => b.Id == id);
@@ -41,5 +48,6 @@ namespace BookStore.DL.Repositories
                 Title = book.Title,
             });
         }
+       
     }
 }
