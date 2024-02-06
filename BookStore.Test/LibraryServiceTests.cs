@@ -1,10 +1,14 @@
-﻿using BookStore.Models.Models;
+using BookStore.BL.Services;
+using BookStore.DL.Interfaces;
+using BookStore.DL.Repositories;
+using BookStore.Models.Models;
+using Moq;
 
-namespace BookStore.DL.InMemoryDb
+namespace BookStore.Test
 {
-    public static class StaticData
+    public class LibraryServiceTests
     {
-        public static List<Book> Books = new List<Book>()
+        public static List<Book> BookData = new List<Book>()
         {
             new Book()
             {
@@ -56,5 +60,53 @@ namespace BookStore.DL.InMemoryDb
                 Bio = "An Italian immigrant, moving to America, he was mesmorised by their culture, which led to his award-winning autobiography - A boot in American soil"
             },
         };
+        [Fact]
+        public void CheckBookCount_OK()
+        {
+            //setup
+            var input = 10;
+            var expectedCount = 14;
+
+            var mockedBookRepository =
+                new Mock<IBookRepository>();
+
+            mockedBookRepository.Setup(x => x.GetAllBooks()).Returns(BookData);
+
+            //inject
+            var bookService = new BookService(mockedBookRepository.Object);
+            var authorService = new AuthorService(new AuthorRepository());
+            var service = new LibraryService(authorService, bookService);
+
+            //act
+            var result = service.CheckBookCount(input);
+
+            //Assert
+            Assert.Equal(expectedCount, result);
+
+        }
+        [Fact]
+        public void CheckBookCount_NegativeInput()
+        {
+            //setup
+            var input = -10;
+            var expectedCount = 0;
+
+            var mockedBookRepository =
+                new Mock<IBookRepository>();
+
+            mockedBookRepository.Setup(x => x.GetAllBooks()).Returns(BookData);
+
+            //inject
+            var bookService = new BookService(mockedBookRepository.Object);
+            var authorService = new AuthorService(new AuthorRepository());
+            var service = new LibraryService(authorService, bookService);
+
+            //act
+            var result = service.CheckBookCount(input);
+
+            //Assert
+            Assert.Equal(expectedCount, result);
+
+        }
     }
 }
