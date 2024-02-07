@@ -5,7 +5,7 @@ using BookStore.DL.Repositories;
 using BookStore.Models.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AuthorStore.Controllers
+namespace BookStore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

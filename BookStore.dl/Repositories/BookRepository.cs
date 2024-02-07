@@ -48,6 +48,5 @@ namespace BookStore.DL.Repositories
                 Title = book.Title,
             });
         }
-       
     }
 }

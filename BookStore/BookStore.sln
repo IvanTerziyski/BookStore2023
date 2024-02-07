@@ -5,11 +5,13 @@ VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore", "BookStore.csproj", "{22EF8746-E7C5-42F6-899E-7B7381EFF151}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.BL", "..\BookStore.bl\BookStore.BL.csproj", "{1CD5A722-5547-4C0B-946C-E2B5F64B1CA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.BL", "..\BookStore.bl\BookStore.BL.csproj", "{1CD5A722-5547-4C0B-946C-E2B5F64B1CA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.DL", "..\BookStore.dl\BookStore.DL.csproj", "{0558EF69-223A-49CC-A6F2-3A3DC66D436C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.DL", "..\BookStore.dl\BookStore.DL.csproj", "{0558EF69-223A-49CC-A6F2-3A3DC66D436C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Models", "..\BookStore.Models\BookStore.Models.csproj", "{4591DBD7-6A15-4C71-9757-F4B7396B4B10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Models", "..\BookStore.Models\BookStore.Models.csproj", "{4591DBD7-6A15-4C71-9757-F4B7396B4B10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Test", "..\BookStore.Test\BookStore.Test.csproj", "{D6B77E7E-9E79-48EE-8017-ADC207A93221}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{4591DBD7-6A15-4C71-9757-F4B7396B4B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4591DBD7-6A15-4C71-9757-F4B7396B4B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4591DBD7-6A15-4C71-9757-F4B7396B4B10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6B77E7E-9E79-48EE-8017-ADC207A93221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6B77E7E-9E79-48EE-8017-ADC207A93221}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6B77E7E-9E79-48EE-8017-ADC207A93221}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6B77E7E-9E79-48EE-8017-ADC207A93221}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
