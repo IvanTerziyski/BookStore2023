@@ -5,6 +5,10 @@ using BookStore.BL.Services;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using BookStore.HealthChecks;
+using MongoDB.Driver;
+using BookStore.DL.Configs;
+using Microsoft.Extensions.DependencyInjection;
+using BookStore.DL.Repositories.Mongo;
 
 namespace BookStore
 {
@@ -14,8 +18,10 @@ namespace BookStore
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.Configure<MongoConfiguration>(builder.Configuration.GetSection(nameof(MongoConfiguration)));
+
             // Add services to the container.
-            builder.Services.AddSingleton<IBookRepository, BookRepository>();
+            builder.Services.AddSingleton<IBookRepository, BookRepositoryMongo>();
             builder.Services.AddSingleton<IBookService, BookService>();
             builder.Services.AddSingleton<IAuthorRepository, AuthorRepository>();
             builder.Services.AddSingleton<IAuthorService, AuthorService>();
