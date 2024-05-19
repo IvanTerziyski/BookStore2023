@@ -1,4 +1,5 @@
 ﻿using BookStore.Models.Models;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BookStore.DL.InMemoryDb
 {
@@ -8,33 +9,33 @@ namespace BookStore.DL.InMemoryDb
         {
             new Book()
             {
-                Id = 1,
+                Id = Guid.NewGuid(),
                 Title = "Book 1",
                 AuthorId = 1,
                 ReleaseDate = new DateTime(2005,05,07)
             },
             new Book()
             {
-                Id = 2,
+                Id = Guid.NewGuid(),
                 Title = "Book 2",
                 AuthorId = 2,
                 ReleaseDate = new DateTime(2009,06,25)
             },
             new Book()
             {
-                Id = 3,
+                Id = Guid.NewGuid(),
                 Title = "Book 3",
                 AuthorId = 3,
                 ReleaseDate = new DateTime(2015,10,10)
             },
             new Book()
             {
-                Id = 4,
+                Id = Guid.NewGuid(),
                 Title = "Book 4",
                 AuthorId = 1,
                 ReleaseDate = new DateTime(2007,05,07)
             },
-        };
+        };      
         public static List<Author> Authors = new List<Author>()
         {
             new Author()
@@ -57,4 +58,22 @@ namespace BookStore.DL.InMemoryDb
             },
         };
     }
+    public class BookDictionary
+    {
+        public Dictionary<string, Book> BookLibrary = new Dictionary<string, Book>();
+        void StaticBookDictionary()
+        {
+
+        }
+        //public void AddBookToDictionary(string key, Book book)
+        public void AddBookToDictionary()
+        {
+
+        }
+        public void DeleteBookFromDictionary()
+        {
+
+        }
+    }
+
 }

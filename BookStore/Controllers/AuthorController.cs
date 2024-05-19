@@ -3,10 +3,13 @@ using BookStore.BL.Services;
 using BookStore.DL.Interfaces;
 using BookStore.DL.Repositories;
 using BookStore.Models.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class AuthorController : ControllerBase
@@ -16,36 +19,47 @@ namespace BookStore.Controllers
         {
             _AuthorService = AuthorService;
         }
-
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("GetById")]
-        public Author? GetAuthor(int id)
+        public async Task<IActionResult> GetAuthor(int id)
         {
-            return _AuthorService.GetAuthor(id);
+            if (id < 0) return BadRequest(id);
+            var result = await _AuthorService.GetAuthor(id);
+            return result != null ? Ok(result) : NotFound(id);
         }
 
         [HttpPost("Add")]
-        public void AddAuthor([FromBody] Author Author)
+        public async Task<IActionResult> AddAuthor([FromBody] Author author)
         {
-            _AuthorService.AddAuthor(Author);
+            if (author == null) return BadRequest(author);
+            await _AuthorService.AddAuthor(author);
+            return Ok(author);
         }
 
         [HttpDelete("Delete")]
-        public void DeleteAuthor(int id)
+        public async Task<IActionResult> DeleteAuthor(int id)
         {
-            _AuthorService.DeleteAuthor(id);
+            if (id < 0) return BadRequest(id);
+            await _AuthorService.DeleteAuthor(id);
+            return Ok();
         }
 
         [HttpPost("Update")]
-        public void UpdateAuthor([FromBody] Author Author)
+        public async Task<IActionResult> UpdateAuthor([FromBody] Author author)
         {
-            _AuthorService.UpdateAuthor(Author);
+            if (author == null) return BadRequest(author);
+            await _AuthorService.UpdateAuthor(author);
+            return Ok();
         }
 
         [HttpGet("GetAllAuthors")]
-        public List<Author> GetAllAuthors()
+        public async Task<IActionResult> GetAllAuthors()
         {
-            return _AuthorService.GetAllAuthors();
-        }
+            var result = await _AuthorService.GetAllAuthors();
+            if (result != null && result.Count == 0) return NoContent();
 
+            return Ok(result);
+
+        }
     }
 }

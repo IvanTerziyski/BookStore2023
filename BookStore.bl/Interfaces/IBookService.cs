@@ -4,16 +4,15 @@ namespace BookStore.BL.Interfaces
 {
     public interface IBookService
     {
-        public void AddBook(Book book);
+        public Task AddBook(Book book);
 
-        public void DeleteBook(int id);
+        public Task DeleteBook(Guid id);
 
-        public void UpdateBook(Book book);
+        Task UpdateBook(Book book);
 
+        Task<Book?> GetBook(Guid id);
 
-        public Book? GetBook(int id);
-
-        public List<Book> GetAllBooksByAuthorAfterReleaseDate(int AuthorId, DateTime DateAfter);
-        public List<Book> GetAllBooks();
+        Task<List<Book>> GetAllBooksByAuthorAfterReleaseDate(int AuthorId, DateTime DateAfter);
+        Task<List<Book>> GetAllBooks();
     }
 }

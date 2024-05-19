@@ -4,16 +4,14 @@ namespace BookStore.BL.Interfaces
 {
     public interface IAuthorService
     {
-        public void AddAuthor(Author author);
+        Task AddAuthor(Author author);
 
-        public void DeleteAuthor(int id);
+        Task DeleteAuthor(int id);
 
-        public void UpdateAuthor(Author author);
+        Task UpdateAuthor(Author author);
 
+        Task<Author?> GetAuthor(int id);
 
-        public Author? GetAuthor(int id);
-
-
-        public List<Author> GetAllAuthors();
+        Task<List<Author>> GetAllAuthors();
     }
 }

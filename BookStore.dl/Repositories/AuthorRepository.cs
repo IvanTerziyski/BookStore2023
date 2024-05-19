@@ -4,7 +4,7 @@ using BookStore.Models.Models;
 
 namespace BookStore.DL.Repositories
 {
-    public class AuthorRepository : IAuthorRepository
+    public class AuthorRepository //: IAuthorRepository
     {
         public void AddAuthor(Author author)
         {
