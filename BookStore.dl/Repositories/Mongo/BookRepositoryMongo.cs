@@ -1,45 +1,53 @@
-﻿using BookStore.DL.Configs;
+﻿using BookStore.Models.Configurations;
 using BookStore.DL.Interfaces;
 using BookStore.Models.Models;
 using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 namespace BookStore.DL.Repositories.Mongo
 {
     public class BookRepositoryMongo : IBookRepository
     {
-        public IOptionsMonitor<MongoConfiguration> _mongoConfig;
-        public BookRepositoryMongo(IOptionsMonitor<MongoConfiguration> mongoConfig)
+        public IOptions<MongoConfiguration> _mongoConfig;
+        private readonly IMongoCollection<Book> _books;
+        
+        public BookRepositoryMongo(IOptions<MongoConfiguration> mongoConfig)
         {
             _mongoConfig = mongoConfig;
+
+            var clinet = new MongoClient(mongoConfig.Value.ConnectionString);
+            var db = clinet.GetDatabase(mongoConfig.Value.DatabaseName);
+            _books = db.GetCollection<Book>("Books");
         }
-        public void AddBook(Book book)
+        public async Task AddBook(Book book)
         {
-            throw new NotImplementedException();
+            await _books.InsertOneAsync(book);
         }
 
-        public void DeleteBook(int id)
+        public async Task DeleteBook(Guid id)
         {
-            throw new NotImplementedException();
+            await _books.DeleteOneAsync(b => b.Id == id);
         }
 
-        public List<Book> GetAllBooks()
+        public async Task<List<Book>> GetAllBooks()
         {
-            throw new NotImplementedException();
+            return await _books.Find(b => true).ToListAsync();
         }
 
-        public List<Book> GetAllBooksByAuthor(int authorId)
+        public async Task<List<Book>> GetAllBooksByAuthor(int authorId)
         {
-            throw new NotImplementedException();
+           return await _books.Find(b => b.AuthorId == authorId).ToListAsync();
         }
 
-        public Book? GetBook(int id)
+        public async Task<Book?> GetBook(Guid id)
         {
-            throw new NotImplementedException();
+            var result = await _books.FindAsync(b => b.Id == id);
+            return result.FirstOrDefault();
         }
 
-        public void UpdateBook(Book book)
+        public async Task UpdateBook(Book book)
         {
-            throw new NotImplementedException();
+            await _books.ReplaceOneAsync(b => b.Id == book.Id, book);
         }
     }
 }

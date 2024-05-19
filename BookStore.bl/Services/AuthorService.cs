@@ -1,5 +1,6 @@
 ﻿using BookStore.BL.Interfaces;
 using BookStore.DL.Interfaces;
+using BookStore.DL.Repositories;
 using BookStore.Models.Models;
 
 namespace BookStore.BL.Services
@@ -11,29 +12,29 @@ namespace BookStore.BL.Services
         {
             _AuthorRepository = AuthorRepository;
         }
-        public void AddAuthor(Author Author)
+        public async Task AddAuthor(Author Author)
         {
-            _AuthorRepository.AddAuthor(Author);
+            await _AuthorRepository.AddAuthor(Author);
         }
 
-        public void DeleteAuthor(int id)
+        public async Task DeleteAuthor(int id)
         {
-            _AuthorRepository.DeleteAuthor(id);
+            await _AuthorRepository.DeleteAuthor(id);
         }
 
-        public List<Author> GetAllAuthors()
+        public Task<List<Author>> GetAllAuthors()
         {
             return _AuthorRepository.GetAllAuthors();
         }
 
-        public Author? GetAuthor(int id)
+        public async Task<Author?> GetAuthor(int id)
         {
-            return _AuthorRepository.GetAuthor(id);
+            return await _AuthorRepository.GetAuthor(id);
         }
 
-        public void UpdateAuthor(Author Author)
+        public async Task UpdateAuthor(Author Author)
         {
-            _AuthorRepository.UpdateAuthor(Author);
+            await _AuthorRepository.UpdateAuthor(Author);
         }
     }
 }

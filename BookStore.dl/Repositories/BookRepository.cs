@@ -4,14 +4,14 @@ using BookStore.Models.Models;
 
 namespace BookStore.DL.Repositories
 {
-    public class BookRepository : IBookRepository
+    public class BookRepository //: IBookRepository
     {
         public void AddBook(Book book)
         {
             StaticData.Books.Add(book);
         }
 
-        public void DeleteBook(int id)
+        public void DeleteBook(Guid id)
         {
             var book = StaticData.Books.FirstOrDefault(b => b.Id == id);
             if (book == null) return;
@@ -30,7 +30,7 @@ namespace BookStore.DL.Repositories
                     .ToList();
         }
 
-        public Book? GetBook(int id)
+        public Book? GetBook(Guid id)
         {
             return StaticData.Books.FirstOrDefault(b => b.Id == id);
         }

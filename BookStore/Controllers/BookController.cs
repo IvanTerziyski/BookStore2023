@@ -18,33 +18,47 @@ namespace BookStore.Controllers
         }
 
         [HttpGet("GetById")]
-        public Book? GetBook(int id)
+        public async Task<IActionResult> GetBook(Guid id)
         {
-            return _bookService.GetBook(id);
+
+            if (id == Guid.Empty) return BadRequest(id);
+            var result = await _bookService.GetBook(id);
+            return result !=null ? Ok(result) : NotFound(id);
         }
 
         [HttpPost("Add")]
-        public void AddBook([FromBody] Book book)
+        public async Task<IActionResult> AddBook([FromBody] Book book)
         {
-            _bookService.AddBook(book);
+            if (book == null) return BadRequest(book);
+            await _bookService.AddBook(book);
+            return Ok();
         }
 
         [HttpDelete("Delete")]
-        public void DeleteBook(int id) 
-        { 
-            _bookService.DeleteBook(id);
+        public async Task<IActionResult> DeleteBook(Guid id) 
+        {
+            if (id == Guid.Empty) return BadRequest(id);
+            await _bookService.DeleteBook(id);
+            return Ok();
         }
 
         [HttpPost("Update")]
-        public void UpdateBook([FromBody] Book book)
+        public async Task<IActionResult> UpdateBook([FromBody] Book book)
         {
-            _bookService.UpdateBook(book);
+            if(book == null) return BadRequest(book);
+            await _bookService.UpdateBook(book);
+            return Ok();
         }
 
         [HttpGet("GetAllBooks")]
-        public List<Book> GetAllBooks()
+        public async Task<IActionResult> GetAllBooks()
         {
-            return _bookService.GetAllBooks();
+            var result = await _bookService.GetAllBooks();
+            if (result != null && result.Count == 0) return NoContent();
+
+            return Ok(result);
+            
+
         }
         
     }

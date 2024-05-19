@@ -5,10 +5,10 @@ namespace BookStore.BL.Interfaces
 {
     public interface ILibraryService
     {
-        GetAllBookByAuthorResponse
+        Task<GetAllBookByAuthorResponse?>
             GetAllBookByAuthorAfterReleaseDate(GetAllBookByAuthorRequest request);
 
-        public int CheckBookCount(int input);
+        public Task<int> CheckBookCount(int input);
 
     }
 }
